@@ -3,7 +3,7 @@ module github.com/zsystm/gadget
 go 1.21.0
 
 require (
-	github.com/btcsuite/btcutil v0.0.0-20190425235716-9e5f4b9a998d
+	github.com/btcsuite/btcutil v1.0.2
 	github.com/spf13/cobra v1.8.0
 )
 
