@@ -1,4 +1,4 @@
-module zsystm/gadget
+module github.com/zsystm/gadget
 
 go 1.21.0
 
