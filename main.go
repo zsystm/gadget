@@ -17,9 +17,9 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-var convFromBechCmd = &cobra.Command{
-	Use:   "conv-from-bech [bech32-address]",
-	Short: "Convert a bech32 address to 20-byte hexadecimal format (= Ethereum address)",
+var bechToEthCmd = &cobra.Command{
+	Use:   "bech-to-eth [bech32-address]",
+	Short: "Convert a bech32 address to 20-byte hexadecimal ethereum address)",
 	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		bech32Address := args[0]
@@ -39,7 +39,7 @@ var convFromBechCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(convFromBechCmd)
+	rootCmd.AddCommand(bechToEthCmd)
 }
 
 func main() {
@@ -47,16 +47,4 @@ func main() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-}
-
-func convertFromBech32(bech32Address string) (string, error) {
-	// Check if the bech32 address is valid
-	_, _, err := bech32.Decode(bech32Address)
-	if err != nil {
-		return "", fmt.Errorf("invalid bech32 address: %v", err)
-	}
-
-	// Concatenate "cosmos" to the front of the bech32 address
-	result := "cosmos" + bech32Address
-	return result, nil
 }
