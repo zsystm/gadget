@@ -27,4 +27,6 @@ func initializeCommands() {
 	rootCmd.AddCommand(ethCmd)
 	rootCmd.AddCommand(bechToEthCmd)
 	rootCmd.AddCommand(ethToBechCmd)
+	rootCmd.AddCommand(base64ToHexCmd)
+	rootCmd.AddCommand(hexToBase64Cmd)
 }
