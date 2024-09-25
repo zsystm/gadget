@@ -2,9 +2,12 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 
 	"github.com/spf13/cobra"
@@ -27,10 +30,18 @@ var getBalanceCmd = &cobra.Command{
 	RunE:  getBalanceCmdHandler,
 }
 
+var newAcc = &cobra.Command{
+	Use:   "new-acc",
+	Short: "Create a random account",
+	Args:  cobra.ExactArgs(0),
+	RunE:  newAccHandler,
+}
+
 func init() {
 	var RPCAddr string
 	getBalanceCmd.PersistentFlags().StringVarP(&RPCAddr, "rpc-addr", "r", DefaultRPCAddr, "The RPC address of the Ethereum node")
 	ethCmd.AddCommand(getBalanceCmd)
+	ethCmd.AddCommand(newAcc)
 }
 
 func getBalanceCmdHandler(cmd *cobra.Command, args []string) error {
@@ -53,5 +64,25 @@ func getBalanceCmdHandler(cmd *cobra.Command, args []string) error {
 		return err
 	}
 	fmt.Println(balance.String())
+	return nil
+}
+
+func newAccHandler(cmd *cobra.Command, args []string) error {
+	key, err := crypto.GenerateKey()
+	if err != nil {
+		return err
+	}
+	privKey := hexutil.Encode(crypto.FromECDSA(key))
+	acc := struct {
+		EthPrivKey string         `json:"privateKey"`
+		EthAddr    common.Address `json:"address"`
+	}{}
+	acc.EthPrivKey = privKey
+	acc.EthAddr = crypto.PubkeyToAddress(key.PublicKey)
+	marshaled, err := json.MarshalIndent(acc, "", "  ")
+	if err != nil {
+		return err
+	}
+	fmt.Printf("%s\n", marshaled)
 	return nil
 }
