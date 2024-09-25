@@ -35,9 +35,9 @@ var privValFromPrivateKeyCmd = &cobra.Command{
 }
 
 var genesisInfoFromPrivateKeyCmd = &cobra.Command{
-	Use:   "genesis [private-key-hex(no 0x)]",
+	Use:   "genesis [prefix] [private-key-hex(no 0x)]",
 	Short: "Convert a private hex string(without 0x) to genesis info",
-	Args:  cobra.ExactArgs(1),
+	Args:  cobra.ExactArgs(2),
 	RunE:  genesisInfoFromPrivateKeyHandler,
 }
 
@@ -88,15 +88,20 @@ var privValFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) error
 }
 
 var genesisInfoFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) error {
-	var privKeyBytes [secp256k1.PrivKeySize]byte
-	input, err := hex.DecodeString(args[0])
+	prefix := args[0]
+	input, err := hex.DecodeString(args[1])
 	if err != nil {
 		return err
 	}
+	var privKeyBytes [secp256k1.PrivKeySize]byte
 	copy(privKeyBytes[:], input)
 	privKey := secp256k1.PrivKey(privKeyBytes[:])
 	pubKey := privKey.PubKey()
 
+	conf := sdk.GetConfig()
+	conf.SetBech32PrefixForAccount(prefix, prefix+"pub")
+	conf.SetBech32PrefixForValidator(prefix+"valoper", prefix+"valoperpub")
+	conf.SetBech32PrefixForConsensusNode(prefix+"valcons", prefix+"valconspub")
 	accAddr := sdk.AccAddress(pubKey.Address().Bytes()).String()
 	valAddr := sdk.ValAddress(pubKey.Address().Bytes()).String()
 	pubKeyBase64 := base64.StdEncoding.EncodeToString(pubKey.Bytes())
