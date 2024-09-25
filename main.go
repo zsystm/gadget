@@ -29,4 +29,5 @@ func initializeCommands() {
 	rootCmd.AddCommand(ethToBechCmd)
 	rootCmd.AddCommand(base64ToHexCmd)
 	rootCmd.AddCommand(hexToBase64Cmd)
+	rootCmd.AddCommand(pubKeyFromPrivateKeyCmd)
 }
