@@ -40,16 +40,17 @@ gadget secp256k1 privval 1afed3c4437316f73d28f69fd5e90ffc551a3862d08c34073e42f89
 }
 ```
 
-### Secp256k1 Genesis Information
-Create information needed for custom genesis from private key:
+### Secp256k1 Account Information
+Get account information from private key:
 
 ```bash
-gadget secp256k1 genesis story 164c8835a7457ba0f0e5328d1d7972e259f1a979d0eb7692c31c5f6ae44e27a3
+gadget secp256k1 acc story 164c8835a7457ba0f0e5328d1d7972e259f1a979d0eb7692c31c5f6ae44e27a3
 ```
 **Result:**
 
 ```json
 {
+  "ethAddr": "0x881319354734eb9366A26a4f3e640BA55F1a2e0c",
   "accAddr": "story1su9j6aqslfz8awmpuq75ruqmw3h5zvfh7zkaax",
   "valAddr": "storyvaloper1su9j6aqslfz8awmpuq75ruqmw3h5zvfhsdzukd",
   "pubKey": "A1Sh0t3iqUEvMEfxBYaLCmRoDfqvNzIw0UjmkYBivSZC"
@@ -71,7 +72,6 @@ hex: 0354a1d2dde2a9412f3047f105868b0a64680dfaaf373230d148e6918062bd2642
 
 - `b64-to-hex`  — Convert a base64 string to hexadecimal
 - `bech-to-eth` — Convert a Bech32 address to a 20-byte Ethereum hexadecimal address
-- `completion`  — Generate an autocompletion script for the specified shell
 - `eth`         — Ethereum-related commands
 - `eth-to-bech` — Convert a 20-byte Ethereum hexadecimal address to Bech32
 - `hex-to-b64`  — Convert a hexadecimal string to base64

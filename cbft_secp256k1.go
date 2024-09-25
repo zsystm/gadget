@@ -11,6 +11,7 @@ import (
 	"github.com/cometbft/cometbft/privval"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/spf13/cobra"
 )
 
@@ -34,17 +35,17 @@ var privValFromPrivateKeyCmd = &cobra.Command{
 	RunE:  privValFromPrivateKeyHandler,
 }
 
-var genesisInfoFromPrivateKeyCmd = &cobra.Command{
-	Use:   "genesis [prefix] [private-key-hex(no 0x)]",
-	Short: "Convert a private hex string(without 0x) to genesis info",
+var accInfoFromPrivateKeyCmd = &cobra.Command{
+	Use:   "acc [prefix] [private-key-hex(no 0x)]",
+	Short: "Convert a private hex string(without 0x) to account info",
 	Args:  cobra.ExactArgs(2),
-	RunE:  genesisInfoFromPrivateKeyHandler,
+	RunE:  accInfoFromPrivateKeyHandler,
 }
 
 func init() {
 	secp256k1Cmd.AddCommand(pubKeyFromPrivateKeyCmd)
 	secp256k1Cmd.AddCommand(privValFromPrivateKeyCmd)
-	secp256k1Cmd.AddCommand(genesisInfoFromPrivateKeyCmd)
+	secp256k1Cmd.AddCommand(accInfoFromPrivateKeyCmd)
 }
 
 var pubKeyFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) error {
@@ -87,9 +88,15 @@ var privValFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) error
 	return nil
 }
 
-var genesisInfoFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) error {
+var accInfoFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) error {
 	prefix := args[0]
-	input, err := hex.DecodeString(args[1])
+	inputPrivKey := args[1]
+	ethPrivKey, err := crypto.HexToECDSA(inputPrivKey)
+	if err != nil {
+		return err
+	}
+	ethAddr := crypto.PubkeyToAddress(ethPrivKey.PublicKey).Hex()
+	input, err := hex.DecodeString(inputPrivKey)
 	if err != nil {
 		return err
 	}
@@ -107,10 +114,12 @@ var genesisInfoFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) e
 	pubKeyBase64 := base64.StdEncoding.EncodeToString(pubKey.Bytes())
 
 	output := struct {
+		EthAddr string `json:"ethAddr"`
 		AccAddr string `json:"accAddr"`
 		ValAddr string `json:"valAddr"`
 		PubKey  string `json:"pubKey"`
 	}{
+		EthAddr: ethAddr,
 		AccAddr: accAddr,
 		ValAddr: valAddr,
 		PubKey:  pubKeyBase64,
@@ -120,6 +129,6 @@ var genesisInfoFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) e
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("genesisInfo:%s\n", jsonBytes)
+	fmt.Printf("%s\n", jsonBytes)
 	return nil
 }
