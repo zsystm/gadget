@@ -9,7 +9,7 @@ go build -o gadget
 ```
 
 ## Usage Examples
-go install github.com/zsystm/gadget@v1.0.1
+install binary first: `go install github.com/zsystm/gadget@v1.0.1`
 
 ### Secp256k1 Private Validator Key
 Generate a Secp256k1 private validator key:
