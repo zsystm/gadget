@@ -9,11 +9,13 @@ go build -o gadget
 ```
 
 ## Usage Examples
+go install github.com/zsystm/gadget@v1.0.1
+
 ### Secp256k1 Private Validator Key
 Generate a Secp256k1 private validator key:
 
 ```bash
-`./gadget secp256k1 privval 1afed3c4437316f73d28f69fd5e90ffc551a3862d08c34073e42f89d9dcc7149`
+gadget secp256k1 privval 1afed3c4437316f73d28f69fd5e90ffc551a3862d08c34073e42f89d9dcc7149
 ```
 **Result:**
 
@@ -42,7 +44,7 @@ Generate a Secp256k1 private validator key:
 Create information needed for custom genesis from private key:
 
 ```bash
-./gadget secp256k1 genesis story 164c8835a7457ba0f0e5328d1d7972e259f1a979d0eb7692c31c5f6ae44e27a3
+gadget secp256k1 genesis story 164c8835a7457ba0f0e5328d1d7972e259f1a979d0eb7692c31c5f6ae44e27a3
 ```
 **Result:**
 
@@ -58,7 +60,7 @@ Create information needed for custom genesis from private key:
 Convert a base64 string to a hexadecimal representation:
 
 ```bash
-./gadget b64-to-hex A1Sh0t3iqUEvMEfxBYaLCmRoDfqvNzIw0UjmkYBivSZC
+gadget b64-to-hex A1Sh0t3iqUEvMEfxBYaLCmRoDfqvNzIw0UjmkYBivSZC
 ```
 **Result:**
 ```
@@ -79,5 +81,5 @@ hex: 0354a1d2dde2a9412f3047f105868b0a64680dfaaf373230d148e6918062bd2642
 For detailed help on any command, use:
 
 ```bash
-./gadget help [command]
+gadget help [command]
 ```
