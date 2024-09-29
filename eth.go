@@ -37,11 +37,19 @@ var newAcc = &cobra.Command{
 	RunE:  newAccHandler,
 }
 
+var getAddressFromPrivateKey = &cobra.Command{
+	Use:   "addr [private-key]",
+	Short: "Get the address from a private key",
+	Args:  cobra.ExactArgs(1),
+	RunE:  getAddressFromPrivateKeyHandler,
+}
+
 func init() {
 	var RPCAddr string
 	getBalanceCmd.PersistentFlags().StringVarP(&RPCAddr, "rpc-addr", "r", DefaultRPCAddr, "The RPC address of the Ethereum node")
 	ethCmd.AddCommand(getBalanceCmd)
 	ethCmd.AddCommand(newAcc)
+	ethCmd.AddCommand(getAddressFromPrivateKey)
 }
 
 func getBalanceCmdHandler(cmd *cobra.Command, args []string) error {
@@ -84,5 +92,15 @@ func newAccHandler(cmd *cobra.Command, args []string) error {
 		return err
 	}
 	fmt.Printf("%s\n", marshaled)
+	return nil
+}
+
+func getAddressFromPrivateKeyHandler(cmd *cobra.Command, args []string) error {
+	privKey, err := crypto.HexToECDSA(args[0])
+	if err != nil {
+		return err
+	}
+	addr := crypto.PubkeyToAddress(privKey.PublicKey)
+	fmt.Println(addr.Hex())
 	return nil
 }
