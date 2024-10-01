@@ -1,12 +1,12 @@
 module github.com/zsystm/gadget
 
-go 1.21.0
+go 1.23.0
 
 require (
 	github.com/btcsuite/btcutil v1.0.2
 	github.com/cometbft/cometbft v0.38.12
 	github.com/cosmos/cosmos-sdk v0.50.10
-	github.com/ethereum/go-ethereum v1.13.13
+	github.com/ethereum/go-ethereum v1.13.15
 	github.com/spf13/cobra v1.8.1
 )
 
