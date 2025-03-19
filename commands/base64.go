@@ -18,7 +18,7 @@ var Base64ToHexCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		fmt.Printf("hex: %s\n", common.Bytes2Hex(decoded))
+		cmd.Printf("hex: %s\n", common.Bytes2Hex(decoded))
 		return nil
 	},
 }

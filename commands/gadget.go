@@ -26,10 +26,9 @@ func Execute() {
 
 func addCommands() {
 	GadgetCmd.AddCommand(EthCmd)
-	GadgetCmd.AddCommand(BechToEthCmd)
-	GadgetCmd.AddCommand(OtherPrefixCmd)
-	GadgetCmd.AddCommand(EthToBechCmd)
+	GadgetCmd.AddCommand(AddrCmd)
 	GadgetCmd.AddCommand(Base64ToHexCmd)
 	GadgetCmd.AddCommand(HexToBase64Cmd)
 	GadgetCmd.AddCommand(Secp256k1Cmd)
+	GadgetCmd.AddCommand(Ed25519Cmd)
 }
