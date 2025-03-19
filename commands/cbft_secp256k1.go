@@ -1,4 +1,4 @@
-package main
+package commands
 
 import (
 	"encoding/base64"
@@ -15,27 +15,27 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var secp256k1Cmd = &cobra.Command{
+var Secp256k1Cmd = &cobra.Command{
 	Use:   "secp256k1",
 	Short: "secp256k1 related commands",
 	Long:  "All commands related to cometbft secp256k1",
 }
 
-var pubKeyFromPrivateKeyCmd = &cobra.Command{
+var PubKeyFromPrivateKeyCmd = &cobra.Command{
 	Use:   "pub [private-key-hex(no 0x)]",
 	Short: "Convert a private hex string(without 0x) to public key",
 	Args:  cobra.ExactArgs(1),
 	RunE:  pubKeyFromPrivateKeyHandler,
 }
 
-var privValFromPrivateKeyCmd = &cobra.Command{
+var PrivValFromPrivateKeyCmd = &cobra.Command{
 	Use:   "privval [private-key-hex(no 0x)]",
 	Short: "Convert a private hex string(without 0x) to privval key",
 	Args:  cobra.ExactArgs(1),
 	RunE:  privValFromPrivateKeyHandler,
 }
 
-var accInfoFromPrivateKeyCmd = &cobra.Command{
+var AccInfoFromPrivateKeyCmd = &cobra.Command{
 	Use:   "acc [prefix] [private-key-hex(no 0x)]",
 	Short: "Convert a private hex string(without 0x) to account info",
 	Args:  cobra.ExactArgs(2),
@@ -43,9 +43,9 @@ var accInfoFromPrivateKeyCmd = &cobra.Command{
 }
 
 func init() {
-	secp256k1Cmd.AddCommand(pubKeyFromPrivateKeyCmd)
-	secp256k1Cmd.AddCommand(privValFromPrivateKeyCmd)
-	secp256k1Cmd.AddCommand(accInfoFromPrivateKeyCmd)
+	Secp256k1Cmd.AddCommand(PubKeyFromPrivateKeyCmd)
+	Secp256k1Cmd.AddCommand(PrivValFromPrivateKeyCmd)
+	Secp256k1Cmd.AddCommand(AccInfoFromPrivateKeyCmd)
 }
 
 var pubKeyFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) error {

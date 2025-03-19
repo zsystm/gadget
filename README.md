@@ -5,7 +5,7 @@ A simple utility tool for various cryptographic and address-related tasks.
 To build the gadget tool, use:
 
 ```bash
-go build -o gadget
+go build -o gadget cmd/gadget/main.go
 ```
 
 ## Usage Examples

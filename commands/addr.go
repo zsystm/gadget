@@ -1,4 +1,4 @@
-package main
+package commands
 
 import (
 	"encoding/hex"
@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var bechToEthCmd = &cobra.Command{
+var BechToEthCmd = &cobra.Command{
 	Use:   "bech-to-eth [bech32-address]",
 	Short: "Convert a bech32 address to 20-byte hexadecimal ethereum address)",
 	Args:  cobra.ExactArgs(1),
@@ -29,7 +29,7 @@ var bechToEthCmd = &cobra.Command{
 	},
 }
 
-var otherPrefixCmd = &cobra.Command{
+var OtherPrefixCmd = &cobra.Command{
 	Use:   "other-prefix [bech32-address] [prefix]",
 	Short: "Convert a bech32 address to another prefix",
 	Args:  cobra.ExactArgs(2),
@@ -61,7 +61,7 @@ var otherPrefixCmd = &cobra.Command{
 	},
 }
 
-var ethToBechCmd = &cobra.Command{
+var EthToBechCmd = &cobra.Command{
 	Use:   "eth-to-bech [eth-address] [prefix]",
 	Short: "Convert a 20-byte hexadecimal ethereum address to bech32 address",
 	Args:  cobra.ExactArgs(2),

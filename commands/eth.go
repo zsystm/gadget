@@ -1,4 +1,4 @@
-package main
+package commands
 
 import (
 	"context"
@@ -17,27 +17,27 @@ const (
 	DefaultRPCAddr = "http://localhost:8545"
 )
 
-var ethCmd = &cobra.Command{
+var EthCmd = &cobra.Command{
 	Use:   "eth",
 	Short: "Ethereum related commands",
 	Long:  "All commands related to Ethereum",
 }
 
-var getBalanceCmd = &cobra.Command{
+var GetBalanceCmd = &cobra.Command{
 	Use:   "get-balance [address]",
 	Short: "Get the balance of an account",
 	Args:  cobra.ExactArgs(1),
 	RunE:  getBalanceCmdHandler,
 }
 
-var newAcc = &cobra.Command{
+var NewAcc = &cobra.Command{
 	Use:   "new-acc",
 	Short: "Create a random account",
 	Args:  cobra.ExactArgs(0),
 	RunE:  newAccHandler,
 }
 
-var getAddressFromPrivateKey = &cobra.Command{
+var GetAddressFromPrivateKey = &cobra.Command{
 	Use:   "addr [private-key]",
 	Short: "Get the address from a private key",
 	Args:  cobra.ExactArgs(1),
@@ -46,10 +46,10 @@ var getAddressFromPrivateKey = &cobra.Command{
 
 func init() {
 	var RPCAddr string
-	getBalanceCmd.PersistentFlags().StringVarP(&RPCAddr, "rpc-addr", "r", DefaultRPCAddr, "The RPC address of the Ethereum node")
-	ethCmd.AddCommand(getBalanceCmd)
-	ethCmd.AddCommand(newAcc)
-	ethCmd.AddCommand(getAddressFromPrivateKey)
+	GetBalanceCmd.PersistentFlags().StringVarP(&RPCAddr, "rpc-addr", "r", DefaultRPCAddr, "The RPC address of the Ethereum node")
+	EthCmd.AddCommand(GetBalanceCmd)
+	EthCmd.AddCommand(NewAcc)
+	EthCmd.AddCommand(GetAddressFromPrivateKey)
 }
 
 func getBalanceCmdHandler(cmd *cobra.Command, args []string) error {
