@@ -36,6 +36,7 @@ make build
 ## Quick Examples
 The following examples demonstrate how to use Gadget for various tasks.
 <details> <summary><strong>1) Get Validator Hex Address from Ed25519 Public Key</strong></summary>
+
 ```bash
 # 1. Check your validator's Ed25519 public key
 cometbft show-validator
@@ -44,16 +45,21 @@ cometbft show-validator
   "type":"tendermint/PubKeyEd25519",
   "value":"xV2T7kMMXB94NOm22wIPrFyaFFGhiodEIliFAaGnODw="
 }
+```
+
 **Result:**
+
 ```bash
 address: 9C1950C518E7F2188B054417A9B33CB41B5935B7
 ```
 
 </details> <details> <summary><strong>2) Generate Secp256k1 Privval Key</strong></summary>
+
 ```bash
 # Generate a Tendermint-style private validator key from a secp256k1 private key
 gadget secp256k1 privval 1afed3c4437316f73d28f69fd5e90ffc551a3862d08c34073e42f89d9dcc7149
 ```
+
 **Result:**
 ```json
 {
@@ -77,9 +83,11 @@ gadget secp256k1 privval 1afed3c4437316f73d28f69fd5e90ffc551a3862d08c34073e42f89
 ```
 
 </details> <details> <summary><strong>3) Get Account Info from Secp256k1 Private Key</strong></summary>
+
 ```bash
 gadget secp256k1 acc story 164c8835a7457ba0f0e5328d1d7972e259f1a979d0eb7692c31c5f6ae44e27a3
 ```
+
 **Result:**
 ```json
 {
@@ -91,9 +99,11 @@ gadget secp256k1 acc story 164c8835a7457ba0f0e5328d1d7972e259f1a979d0eb7692c31c5
 ```
 
 </details> <details> <summary><strong>4) Convert Base64 to Hexadecimal</strong></summary>
+
 ```bash
 gadget b64-to-hex A1Sh0t3iqUEvMEfxBYaLCmRoDfqvNzIw0UjmkYBivSZC
 ```
+
 **Result:**
 ```bash
 hex: 0354a1d2dde2a9412f3047f105868b0a64680dfaaf373230d148e6918062bd2642
