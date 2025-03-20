@@ -45,6 +45,8 @@ cometbft show-validator
   "type":"tendermint/PubKeyEd25519",
   "value":"xV2T7kMMXB94NOm22wIPrFyaFFGhiodEIliFAaGnODw="
 }
+# 2. Get the validator's hex address
+gadget ed25519 addr-from-pubkey xV2T7kMMXB94NOm22wIPrFyaFFGhiodEIliFAaGnODw=
 ```
 
 **Result:**
