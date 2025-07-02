@@ -1,10 +1,10 @@
 package addr
 
 import (
-	"encoding/hex"
 	"fmt"
 
 	"github.com/btcsuite/btcutil/bech32"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +24,8 @@ var BechToEthCmd = &cobra.Command{
 			_ = fmt.Errorf("Error: %v\n", err)
 			return err
 		}
-		fmt.Printf("converted: 0x%s\n", hex.EncodeToString(converted))
+		addr := common.BytesToAddress(converted)
+		fmt.Printf("converted: %s\n", addr.Hex())
 		return nil
 	},
 }
