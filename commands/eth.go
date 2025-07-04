@@ -21,4 +21,5 @@ func init() {
 	EthCmd.AddCommand(eth.GetBalanceCmd)
 	EthCmd.AddCommand(eth.NewAcc)
 	EthCmd.AddCommand(eth.GetAddressFromPrivateKey)
+	EthCmd.AddCommand(eth.MnemonicToKeyCmd)
 }
