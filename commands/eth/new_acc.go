@@ -3,7 +3,6 @@ package eth
 import (
 	"encoding/json"
 
-	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/spf13/cobra"
@@ -23,11 +22,11 @@ func newAccHandler(cmd *cobra.Command, args []string) error {
 	}
 	privKey := hexutil.Encode(crypto.FromECDSA(key))
 	acc := struct {
-		EthPrivKey string         `json:"privateKey"`
-		EthAddr    common.Address `json:"address"`
+		EthPrivKey string `json:"privateKey"`
+		EthAddr    string `json:"address"`
 	}{}
 	acc.EthPrivKey = privKey
-	acc.EthAddr = crypto.PubkeyToAddress(key.PublicKey)
+	acc.EthAddr = crypto.PubkeyToAddress(key.PublicKey).Hex()
 	marshaled, err := json.MarshalIndent(acc, "", "  ")
 	if err != nil {
 		return err
