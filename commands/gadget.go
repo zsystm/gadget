@@ -31,4 +31,5 @@ func addCommands() {
 	GadgetCmd.AddCommand(HexToBase64Cmd)
 	GadgetCmd.AddCommand(Secp256k1Cmd)
 	GadgetCmd.AddCommand(Ed25519Cmd)
+	GadgetCmd.AddCommand(UtilCmd)
 }

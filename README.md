@@ -18,6 +18,8 @@ Gadget provides handy subcommands for working with base64/hex conversions, secp2
 - Ethereum Utilities:
   - Create new Ethereum accounts. 
   - Check balances via RPC.
+- Utility Tools:
+  - Convert between Unix timestamps and UTC date strings.
 
 ## Install
 ### Option 1) Go Install
@@ -132,6 +134,8 @@ The following is a list of available commands in Gadget. Use `gadget help [comma
 - Ed25519 Tools (`ed25519`)
   - `gadget ed25519 addr-from-pubkey`: Ed25519 public key → Tendermint/CometBFT validator hex address
   - `gadget ed25519 pubkey-from-privkey`: Ed25519 private key → public key
+- Utility Tools (`util`)
+  - `gadget util timestamp`: Unix timestamp ↔ UTC date (`YYYY:MM:DD h:m:s`)
 
 ## License
 
