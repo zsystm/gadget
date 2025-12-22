@@ -9,18 +9,19 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/spf13/cobra"
+	cmdhex "github.com/zsystm/gadget/commands/internal/hexutil"
 )
 
 var AccInfoFromPrivKeyCmd = &cobra.Command{
-	Use:   "acc [prefix] [private-key-hex(no 0x)]",
-	Short: "Convert a private hex string(without 0x) to account info",
+	Use:   "acc [prefix] [private-key-hex]",
+	Short: "Convert a private hex string to account info",
 	Args:  cobra.ExactArgs(2),
 	RunE:  accInfoFromPrivateKeyHandler,
 }
 
 var accInfoFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) error {
 	prefix := args[0]
-	inputPrivKey := args[1]
+	inputPrivKey := cmdhex.StripHexPrefix(args[1])
 	ethPrivKey, err := crypto.HexToECDSA(inputPrivKey)
 	if err != nil {
 		return err

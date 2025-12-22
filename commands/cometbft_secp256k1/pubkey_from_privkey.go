@@ -7,18 +7,19 @@ import (
 	"github.com/cometbft/cometbft/crypto/secp256k1"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/spf13/cobra"
+	cmdhex "github.com/zsystm/gadget/commands/internal/hexutil"
 )
 
 var PubKeyFromPrivKeyCmd = &cobra.Command{
-	Use:   "pub [private-key-hex(no 0x)]",
-	Short: "Convert a private hex string(without 0x) to public key",
+	Use:   "pub [private-key-hex]",
+	Short: "Convert a private hex string to public key",
 	Args:  cobra.ExactArgs(1),
 	RunE:  pubKeyFromPrivateKeyHandler,
 }
 
 var pubKeyFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) error {
 	var privKeyBytes [secp256k1.PrivKeySize]byte
-	input, err := hex.DecodeString(args[0])
+	input, err := hex.DecodeString(cmdhex.StripHexPrefix(args[0]))
 	if err != nil {
 		return err
 	}

@@ -6,6 +6,7 @@ import (
 
 	"github.com/btcsuite/btcutil/bech32"
 	"github.com/spf13/cobra"
+	cmdhex "github.com/zsystm/gadget/commands/internal/hexutil"
 )
 
 var EthToBechCmd = &cobra.Command{
@@ -13,11 +14,7 @@ var EthToBechCmd = &cobra.Command{
 	Short: "Convert a 20-byte hexadecimal ethereum address to bech32 address",
 	Args:  cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		ethAddress := args[0]
-		// if ethAddress has 0x prefix, remove it
-		if ethAddress[:2] == "0x" {
-			ethAddress = ethAddress[2:]
-		}
+		ethAddress := cmdhex.StripHexPrefix(args[0])
 		decoded, err := hex.DecodeString(ethAddress)
 		if err != nil {
 			_ = fmt.Errorf("Error: %v\n", err)

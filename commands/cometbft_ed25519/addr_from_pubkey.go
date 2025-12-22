@@ -6,6 +6,7 @@ import (
 
 	"github.com/cometbft/cometbft/crypto/ed25519"
 	"github.com/spf13/cobra"
+	cmdhex "github.com/zsystm/gadget/commands/internal/hexutil"
 )
 
 var AddrFromPubKeyCmd = &cobra.Command{
@@ -24,7 +25,7 @@ var addrFromPubKeyHandler = func(cmd *cobra.Command, args []string) error {
 	decoded, err = base64.StdEncoding.DecodeString(input)
 	if err != nil {
 		// try to decode the input as hex
-		decoded, err = hex.DecodeString(input)
+		decoded, err = hex.DecodeString(cmdhex.StripHexPrefix(input))
 		if err != nil {
 			return err
 		}

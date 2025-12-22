@@ -6,6 +6,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/spf13/cobra"
+	cmdhex "github.com/zsystm/gadget/commands/internal/hexutil"
 )
 
 var Base64ToHexCmd = &cobra.Command{
@@ -28,7 +29,7 @@ var HexToBase64Cmd = &cobra.Command{
 	Short: "Convert a hexadecimal string to base64",
 	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		hexStr := args[0]
+		hexStr := cmdhex.StripHexPrefix(args[0])
 		bytes := common.Hex2Bytes(hexStr)
 		encoded := base64.StdEncoding.EncodeToString(bytes)
 		fmt.Printf("b64: %s\n", encoded)

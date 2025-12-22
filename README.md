@@ -126,9 +126,9 @@ The following is a list of available commands in Gadget. Use `gadget help [comma
   - `gadget eth get-balance`: Get the balance of an Ethereum address using RPC
   - `gadget eth new-acc`: Generate a random Ethereum account
 - Secp256k1 Tools(`secp256k1`)
-  - `gadget secp2565k1 acc`: (hex without 0x) secp256k1 private key → account info.
-  - `gadget secp256k1 privval`: (hex without 0x) secp256k1 private key → Tendermint/CometBFT privval key
-  - `gadget secp256k1 pub`: (hex without 0x) secp256k1 private key → public key
+  - `gadget secp2565k1 acc`: (hex, 0x optional) secp256k1 private key → account info.
+  - `gadget secp256k1 privval`: (hex, 0x optional) secp256k1 private key → Tendermint/CometBFT privval key
+  - `gadget secp256k1 pub`: (hex, 0x optional) secp256k1 private key → public key
 - Ed25519 Tools (`ed25519`)
   - `gadget ed25519 addr-from-pubkey`: Ed25519 public key → Tendermint/CometBFT validator hex address
   - `gadget ed25519 pubkey-from-privkey`: Ed25519 private key → public key
