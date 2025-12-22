@@ -8,18 +8,19 @@ import (
 	cmtjson "github.com/cometbft/cometbft/libs/json"
 	"github.com/cometbft/cometbft/privval"
 	"github.com/spf13/cobra"
+	cmdhex "github.com/zsystm/gadget/commands/internal/hexutil"
 )
 
 var PrivValFromPrivKeyCmd = &cobra.Command{
-	Use:   "privval [private-key-hex(no 0x)]",
-	Short: "Convert a private hex string(without 0x) to privval key",
+	Use:   "privval [private-key-hex]",
+	Short: "Convert a private hex string to privval key",
 	Args:  cobra.ExactArgs(1),
 	RunE:  privValFromPrivateKeyHandler,
 }
 
 var privValFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) error {
 	var privKeyBytes [secp256k1.PrivKeySize]byte
-	input, err := hex.DecodeString(args[0])
+	input, err := hex.DecodeString(cmdhex.StripHexPrefix(args[0]))
 	if err != nil {
 		return err
 	}

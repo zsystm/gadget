@@ -7,6 +7,7 @@ import (
 	"github.com/cometbft/cometbft/crypto/ed25519"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/spf13/cobra"
+	cmdhex "github.com/zsystm/gadget/commands/internal/hexutil"
 )
 
 var PubKeyFromPrivKeyCmd = &cobra.Command{
@@ -18,7 +19,7 @@ var PubKeyFromPrivKeyCmd = &cobra.Command{
 
 var pubKeyFromPrivateKeyHandler = func(cmd *cobra.Command, args []string) error {
 	var privateKeyBytes [ed25519.PrivateKeySize]byte
-	input, err := hex.DecodeString(args[0])
+	input, err := hex.DecodeString(cmdhex.StripHexPrefix(args[0]))
 	if err != nil {
 		return err
 	}
